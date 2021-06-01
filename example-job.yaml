@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cluster-init
+  # generateName: cluster-init- # Use to auto-generate suffix for unique names
+spec:
+  ttlSecondsAfterFinished: 10
+  template:
+    spec:
+      initContainers:
+      - name: downloader
+        image: innovoedge/project-init
+        env:
+        - name: URL
+          value: "https://github.com/servicedeployed/cluster-init.git"
+        # - name: OAUTH_TOKEN
+        #   value: "SUPER_SECRET_TOKEN"
+        volumeMounts:
+        - name: sd-data
+          mountPath: /project
+      containers:
+      - name: runner
+        image: ubuntu
+        command: ["/bin/sh","-c"]
+        args: ["ls /sd-data"]
+        volumeMounts:
+        - name: sd-data
+          mountPath: /sd-data
+      restartPolicy: Never
+      volumes:
+      - name: sd-data
+        emptyDir: {}
+  backoffLimit: 5
