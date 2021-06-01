@@ -11,20 +11,19 @@ elif [[ $URL =~ git$ ]]; then
     if [[ -z "${OAUTH_TOKEN}" ]]; then
         REPLACE_TOKEN=""
     else
-        REPLACE_TOKEN="${OAUTH_TOKEN}@"
+        # Works for GitHub & GitLab Repositories
+        if [[ "$URL" == *"gitlab.com"* ]]; then
+            REPLACE_TOKEN="gitlab-ci-token:${OAUTH_TOKEN}@"
+        else
+            REPLACE_TOKEN="${OAUTH_TOKEN}@"
+        fi
     fi
 
-    # Works for GitHub & GitLab Repositories
-    if [[ "$URL" == *"gitlab.com"* ]]; then
-        URL=$(echo $URL | sed "s/https:\/\//https:\/\/gitlab-ci-token:$REPLACE_TOKEN/g")
-    else
-        URL=$(echo $URL | sed "s/https:\/\//https:\/\/$REPLACE_TOKEN/g")
-    fi
-
+    URL=$(echo $URL | sed "s/https:\/\//https:\/\/$REPLACE_TOKEN/g")
     echo "Cloning: $URL to /project"
     
     git clone $URL /project
-    exit 1
-else
     exit 0
+else
+    exit 1
 fi
