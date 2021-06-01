@@ -18,6 +18,14 @@ This repo contains our project retriever Docker Image. The purpose of this image
 
 This image takes up to 2 ENV Variables, `URL` & `OAUTH_TOKEN`. `OAUTH_TOKEN` is only needed for private GitHub or GitLab.com repositories. The YAML or Git repo will be initialized to `/project` for future use on other initialization steps.
 
+## Volumes
+
+Mount `/project` to your local system if you want to view the initialized files or use that path in another Kubernetes deployment.
+
+Clone the public repo into `$LOCAL_MACHINE_PATH`:
+
+`docker run -e URL="https://github.com/servicedeployed/public-repo.git" -v $LOCAL_MACHINE_PATH:/project innovoedge/project-init`
+
 ## Examples
 
 - `docker run -e URL="https://github.com/servicedeployed/super-secret-repo.git" -e OAUTH_TOKEN="$GITHUB_TOKEN" innovoedge/project-init`
