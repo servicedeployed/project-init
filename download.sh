@@ -20,6 +20,8 @@ elif [[ $URL =~ git$ ]]; then
     else
         URL=$(echo $URL | sed "s/https:\/\//https:\/\/$REPLACE_TOKEN/g")
     fi
+
+    echo "Cloning: $URL to /project"
     
     git clone -q $URL /project
     exit 1
