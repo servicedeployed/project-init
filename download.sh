@@ -23,7 +23,7 @@ elif [[ $URL =~ git$ ]]; then
 
     echo "Cloning: $URL to /project"
     
-    git clone -q $URL /project
+    git clone $URL /project
     exit 1
 else
     exit 0
