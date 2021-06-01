@@ -12,7 +12,7 @@ spec:
         image: innovoedge/project-init
         env:
         - name: URL
-          value: "https://github.com/servicedeployed/cluster-init.git"
+          value: "https://github.com/servicedeployed/project-init.git"
         # - name: OAUTH_TOKEN
         #   value: "SUPER_SECRET_TOKEN"
         volumeMounts:
