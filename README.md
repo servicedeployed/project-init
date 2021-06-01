@@ -35,6 +35,8 @@ Clone the public repo into `$LOCAL_MACHINE_PATH`:
 - `docker run -e URL="https://github.com/jetstack/cert-manager/releases/download/v1.3.0/cert-manager.yaml" innovoedge/project-init`
   - Initialize with Cert-Manager's Installation YAML URL
 
+See [example-job.yaml](./example-job.yaml) for a Kubernetes Sample Job
+
 ## Response
 
-This image will either exit with `1` for a successful download, or `0` for an invalid URL or download error.
+This image will either exit with `0` for a successful download, or `1` for an invalid URL or download error.
