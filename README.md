@@ -12,7 +12,7 @@ This repo contains our project retriever Docker Image. The purpose of this image
 
 ## Docker Hub
 
-[Direct Link to Docker Hub](https://hub.docker.com/r/innovoedge/project-init)
+[Direct Link to Docker Hub](https://hub.docker.com/r/servicedeployed/project-init)
 
 ## Overview
 
