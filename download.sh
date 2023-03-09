@@ -1,8 +1,10 @@
 #!/bin/bash
 
+GIT_CLONE_DIR="${PROJECT_DIR:=/project}"
+
 # Download single YAML File
 if [[ $URL =~ yaml$ ]]; then 
-    curl -L $URL --output /project/init.yaml
+    curl -L $URL --output $GIT_CLONE_DIR/init.yaml
 
 # Clone public or private git repository
 elif [[ $URL =~ git$ ]]; then
@@ -20,9 +22,19 @@ elif [[ $URL =~ git$ ]]; then
     fi
 
     URL=$(echo $URL | sed "s/https:\/\//https:\/\/$REPLACE_TOKEN/g")
-    echo "Cloning: $URL to /project"
+    echo "Cloning: $URL to $GIT_CLONE_DIR"
     
-    git clone $URL /project
+    # Check if Git branch is Empty
+    if [[ -z "${GIT_BRANCH}" ]]; then
+        git clone --quiet \
+            $URL $GIT_CLONE_DIR
+    else
+        git clone \
+            -c advice.detachedHead=false \
+            --quiet \
+            --branch $GIT_BRANCH $URL $GIT_CLONE_DIR
+    fi
+    
     exit 0
 else
     exit 1

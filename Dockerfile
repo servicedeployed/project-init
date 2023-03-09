@@ -10,4 +10,7 @@ WORKDIR /init
 COPY download.sh .
 RUN chmod +x download.sh
 
+ENV PROJECT_DIR=/project
+ENV URL=""
+
 ENTRYPOINT [ "./download.sh" ]

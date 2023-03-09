@@ -13,6 +13,8 @@ spec:
         env:
         - name: URL
           value: "https://github.com/servicedeployed/cluster-init.git"
+        - name: GIT_BRANCH
+          value: main
         # - name: OAUTH_TOKEN
         #   value: "SUPER_SECRET_TOKEN"
         volumeMounts:
